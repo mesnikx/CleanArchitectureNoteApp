@@ -1,12 +1,7 @@
 package com.plcoding.cleanarchitecturenoteapp.feature_note.presentation.notes.components
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
@@ -47,7 +42,13 @@ fun NoteItem(
                 lineTo(0f, size.height)
                 close()
             }
+
             clipPath(clipPath) {
+                drawRoundRect(
+                    color = Color(note.color),
+                    size = size,
+                    cornerRadius = CornerRadius(cornerRadius.toPx())
+                )
                 drawRoundRect(
                     color = Color(
                         ColorUtils.blendARGB(note.color, 0x000000, 0.2f)
@@ -56,7 +57,6 @@ fun NoteItem(
                     size = Size(cutCornerSize.toPx() + 100f, cutCornerSize.toPx() + 100f),
                     cornerRadius = CornerRadius(cornerRadius.toPx())
                 )
-
             }
         }
         Column(
@@ -87,10 +87,9 @@ fun NoteItem(
         ) {
             Icon(
                 imageVector = Icons.Default.Delete,
-                contentDescription = "Delete note"
+                contentDescription = "Delete note",
+                tint = MaterialTheme.colors.onSurface
             )
-
         }
     }
-
 }
